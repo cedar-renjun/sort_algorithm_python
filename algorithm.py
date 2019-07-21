@@ -6,6 +6,7 @@ import math
 
 def sort_fun_0(d):
     n = len(d)
+
     for i in range(0, n):
         min_idx = i
         min_raw = i
@@ -18,21 +19,28 @@ def sort_fun_0(d):
     return d
 
 def sort_fun_1(d):
+
     length = len(d)
+
     for index in range(length):
+        # 标志位
         flag = True
         for j in range(1, length - index):
             if d[j - 1] > d[j]:
                 d[j - 1], d[j] = d[j], d[j - 1]
                 flag = False
         if flag:
+            # 没有发生交换，直接返回list
             return d
     return d
 
 
 def sort_fun_2(d):
+
     n = len(d)
+
     for i in range(1, n):
+
         pre_idx = i-1
         cur_val = d[i]
         
@@ -44,11 +52,58 @@ def sort_fun_2(d):
 
     return d
 
+# shell sort
 def sort_fun_3(d):
+
+    n = len(d)
+    gap = n // 2
+
+    while gap > 0:
+        for i in range(gap, n):
+            j = i
+            while (j - gap) >= 0:
+                if d[j] < d[j-gap]:
+                    d[j],d[j-gap] = d[j-gap],d[j]
+                    j -= gap
+                else:
+                    break
+        gap = gap//2
+
     return d
 
+#merge sort
+def merge(left,right):
+    result = []
+
+    while left and right:
+        if left[0] <= right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+    
+    if left:
+        result += left
+    if right:
+        result += right
+
+    return result
+
+def merge_sort(d):
+
+    if len(d) <= 1:
+        return d
+
+    mid = len(d)//2
+    left = d[:mid]
+    right = d[mid:]
+
+    left = merge_sort(left)
+    right = merge_sort(right)
+
+    return merge(left, right)
+
 def sort_fun_4(d):
-    return d
+    return merge_sort(d)
 
 def sort_fun_5(d):
     return d
@@ -99,7 +154,6 @@ def test_sort(fun, idx):
 
     return test_flag
 
-# test frame
 for i in range(10):
     res = test_sort(my_sort_fun, i)
     if res:
