@@ -4,6 +4,7 @@
 import random
 import math
 
+###############################################################################
 def sort_fun_0(d):
     n = len(d)
 
@@ -18,6 +19,7 @@ def sort_fun_0(d):
     
     return d
 
+###############################################################################
 def sort_fun_1(d):
 
     length = len(d)
@@ -34,7 +36,7 @@ def sort_fun_1(d):
             return d
     return d
 
-
+###############################################################################
 def sort_fun_2(d):
 
     n = len(d)
@@ -52,6 +54,7 @@ def sort_fun_2(d):
 
     return d
 
+###############################################################################
 # shell sort
 def sort_fun_3(d):
 
@@ -102,21 +105,68 @@ def merge_sort(d):
 
     return merge(left, right)
 
+###############################################################################
 def sort_fun_4(d):
     return merge_sort(d)
 
+###############################################################################
+
+def quick_sort(d):
+    if len(d) <= 1:
+        return d
+    
+    left = []
+    right = []
+    mid = []
+    pivot = random.choice(d)
+
+    for i in d:
+        if i == pivot:
+            mid.append(i)
+        elif i < pivot:
+            left.append(i)
+        else:
+            right.append(i)
+    
+    return quick_sort(left) + mid + quick_sort(right)
+
 def sort_fun_5(d):
-    return d
+    return quick_sort(d)
+
+###############################################################################
+#Heap Sort
+
+def heap_sort(d):
+    pass
 
 def sort_fun_6(d):
     return d
 
-def sort_fun_7(d):
-    return d
+###############################################################################
+# count sort
 
+def count_set(d):
+    
+    bucket = [0] * (max(d) -min(d) + 1)
+    for i in d:
+        bucket[i] += 1
+
+    res = []
+    for i in range(len(bucket)):
+        while bucket[i] > 0:
+            res.append(i)
+            bucket[i] -= 1
+
+    return res
+
+def sort_fun_7(d):
+    return count_set(d)
+
+###############################################################################
 def sort_fun_8(d):
     return d
-
+    
+###############################################################################
 def sort_fun_9(d):
     return d
 
